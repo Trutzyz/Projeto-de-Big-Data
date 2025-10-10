@@ -31,6 +31,10 @@ As principais ferramentas e bibliotecas empregadas foram:
 ## 👥 Equipe
 Projeto desenvolvido pelo grupo da disciplina **Tópicos Contemporâneos 3**.
 
+- **Antônio Neto**
+- **Davi César**
+- **João Ricardo**
+
 ---
 
 ## 📊 Resultado Esperado
