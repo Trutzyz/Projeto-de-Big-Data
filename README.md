@@ -1,4 +1,4 @@
-# 🧠 Projeto de Análise e Predição em League of Legends
+# Projeto de Análise e Predição em League of Legends
 
 ## 📘 Descrição do Projeto
 Este projeto foi desenvolvido como parte da disciplina **Tópicos Contemporâneos 3**, com o objetivo de aplicar conceitos de **armazenamento, transformação e análise de dados** sobre partidas ranqueadas do jogo **League of Legends (LoL)**.  
