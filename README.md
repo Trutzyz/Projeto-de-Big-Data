@@ -8,12 +8,12 @@ Avenida Cais do Apolo, 77, Recife-PE -- 50030-22
 
 ------------------------------------------------------------------------
 
-# ANÁLISE DE DADOS DE PARTIDAS PROFISSIONAIS DE LEAGUE OF LEGENDS
+# ANÁLISE DE DADOS DE PARTIDAS RANQUEADAS DE LEAGUE OF LEGENDS
 
 ## RESUMO
 
 O presente relatório tem como objetivo analisar um conjunto de dados
-contendo informações completas de partidas profissionais de *League of
+contendo informações completas de partidas ranqueadas de *League of
 Legends*. A análise envolve limpeza, validação, tratamento de
 inconsistências, remoção de duplicatas e treinamento de um modelo de
 aprendizado de máquina Random Forest para prever o vencedor de uma
@@ -129,7 +129,7 @@ Desempenho geral: **≈ 52%**, apenas um pouco acima do puro chute (50%).
 # 4. DISCUSSÃO
 
 O desempenho modesto do modelo indica que a escolha dos campeões por si
-só não é suficiente para prever o resultado de uma partida profissional.
+só não é suficiente para prever o resultado de uma partida ranqueada.
 
 Fatores ausentes que influenciam fortemente o resultado:
 
@@ -153,6 +153,6 @@ dataset, incluindo:
 
 O modelo alcançou **≈ 52% de acurácia**, revelando que os campeões
 escolhidos não são suficientes para prever com precisão o vencedor em
-partidas profissionais.
+partidas ranqueadas.
 
 ------------------------------------------------------------------------
