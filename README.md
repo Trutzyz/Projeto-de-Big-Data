@@ -1,101 +1,161 @@
-# Projeto de Análise e Predição em League of Legends
+# Tópicos Contemporâneos 3
 
-## 📘 Descrição do Projeto
-Este projeto foi desenvolvido como parte da disciplina **Tópicos Contemporâneos 3**, com o objetivo de aplicar conceitos de **armazenamento, transformação e análise de dados** sobre partidas ranqueadas do jogo **League of Legends (LoL)**.  
+## Projeto da Disciplina - AV2
 
-A partir do dataset analisado, o grupo realizou um processo de **pré-processamento e modelagem preditiva**, utilizando o algoritmo **Random Forest Classifier** para prever resultados com base em variáveis do jogo.
+**Antonio Neto, Davi Cesar, João Ricardo**\
+**Ciência da Computação -- CESAR School**\
+Avenida Cais do Apolo, 77, Recife-PE -- 50030-22
 
----
+------------------------------------------------------------------------
 
-## 🎯 Objetivo
-Criar um **modelo de predição** capaz de estimar o resultado de partidas de League of Legends com base em estatísticas coletadas de jogos ranqueados.
+# ANÁLISE DE DADOS DE PARTIDAS PROFISSIONAIS DE LEAGUE OF LEGENDS
 
----
+## RESUMO
 
-## 📂 Fonte dos Dados
-O dataset utilizado está disponível publicamente no Kaggle:  
-🔗 [League of Legends Ranked Games](https://www.kaggle.com/datasets)
+O presente relatório tem como objetivo analisar um conjunto de dados
+contendo informações completas de partidas profissionais de *League of
+Legends*. A análise envolve limpeza, validação, tratamento de
+inconsistências, remoção de duplicatas e treinamento de um modelo de
+aprendizado de máquina Random Forest para prever o vencedor de uma
+partida com base apenas nos campeões selecionados pelos times.\
+Após a limpeza dos dados, treina-se um classificador com divisão de
+treino e teste de 70/30. O modelo obteve acurácia de aproximadamente
+**51,8%**, indicando baixa capacidade preditiva sob as condições
+utilizadas. O relatório apresenta todas as etapas do processo, bem como
+conclusões a respeito da qualidade do dataset e da validade do modelo
+gerado.
 
----
+------------------------------------------------------------------------
 
-## 🧰 Ferramentas Utilizadas
-As principais ferramentas e bibliotecas empregadas foram:
+# 1. INTRODUÇÃO
 
-- **Google Colab** → ambiente de desenvolvimento e execução do projeto  
-- **Python** → linguagem de programação principal  
-- **Pandas** → manipulação e tratamento de dados  
-- **Scikit-learn (Sklearn)** → implementação e treino do modelo de *Random Forest Classifier*  
+A análise de dados esportivos eletrônicos cresce a cada ano,
+acompanhando o aumento da popularidade dos eSports. *League of Legends*,
+um dos títulos competitivos mais consolidados, oferece diversos
+indicadores de desempenho que podem ser explorados por técnicas de
+ciência de dados e aprendizado de máquina.
 
----
+Este relatório descreve o processo completo de tratamento e análise de
+um dataset contendo mais de 60 variáveis por partida, visando construir
+um modelo capaz de prever o vencedor utilizando apenas os campeões
+selecionados pelos times. O trabalho inclui:
 
-## 👥 Equipe
-Projeto desenvolvido pelo grupo da disciplina **Tópicos Contemporâneos 3**.
+-   inspeção e checagem de nulos e valores inválidos;\
+-   validação de integridade e consistência;\
+-   remoção de outliers;\
+-   eliminação de duplicatas;\
+-   construção e avaliação de um modelo Random Forest.
 
-- **Antônio Neto**
-- **Davi César**
-- **João Ricardo**
+------------------------------------------------------------------------
 
----
+# 2. METODOLOGIA
 
-## 📊 Resultado Esperado
-Um modelo de **classificação preditiva** baseado em aprendizado de máquina, capaz de auxiliar na compreensão dos fatores que mais influenciam a vitória em partidas ranqueadas de *League of Legends*.
+## 2.1 Importação de bibliotecas e leitura dos dados
 
----
+Foram utilizadas as bibliotecas: **pandas**, **numpy**, **sklearn**, e
+ferramentas de upload do Google Colab.\
+Os dados foram carregados a partir do arquivo *games.csv*.
 
-## 🏗️ Arquitetura do Projeto
+## 2.2 Análise inicial do dataset
 
-A arquitetura do projeto foi estruturada para contemplar as três principais etapas do processo de ciência de dados: **armazenamento, transformação** e **análise preditiva**.  
+Foi realizada uma análise exploratória da estrutura do dataset e
+visualização das primeiras linhas. Em seguida, calculou-se quais
+campeões foram mais selecionados.\
+O top 10 mais frequente incluiu ids como **412, 18, 67**, entre outros.
 
-### 1. Ingestão e Armazenamento dos Dados
-Os dados foram obtidos a partir do dataset **League of Legends Ranked Games** disponível no Kaggle.  
-O conjunto de dados foi importado e armazenado em ambiente **Google Colab**, utilizando **Pandas** para leitura e manipulação em memória.  
+## 2.3 Verificação de valores nulos, negativos e inválidos
 
-- **Formato original:** CSV  
-- **Carregamento:** `pandas.read_csv()`  
-- **Armazenamento temporário:** DataFrame Pandas  
+Foram testadas condições básicas de validade:
 
----
+-   gameId ≤ 0 → 0 ocorrências\
+-   gameId, creationTime, gameDuration → 0 valores nulos
 
-### 2. Limpeza e Transformação dos Dados
-Antes da análise, o dataset passou por uma série de transformações para garantir sua consistência e preparar os dados para a modelagem.
+A integridade estrutural também foi avaliada:
 
-As principais etapas foram:
+-   Cada partida deve possuir 10 campeões → 0 inconsistências\
+-   Cada partida deve possuir no máximo 10 bans → 0 inconsistências
 
-- **Remoção de duplicatas:**  
-  Identificação de registros com o mesmo `gameId`. Para evitar distorções, foi mantida apenas **uma instância única** de cada jogo.
+## 2.4 Validação de consistência
 
-- **Filtragem das colunas relevantes:**  
-  Como o objetivo final era prever o time vencedor, todas as colunas desnecessárias foram removidas, mantendo apenas:
-  - As colunas referentes aos **campeões utilizados** nas partidas;
-  - A coluna que indica **qual time venceu** (variável alvo).
+Foram aplicadas regras lógicas relacionadas ao jogo:
 
-- **Análise dos campeões mais frequentes:**  
-  Foi realizada uma contagem para identificar **os 10 campeões mais utilizados** nas partidas.  
-  Essa análise serviu tanto para explorar o dataset quanto para compreender quais variáveis poderiam ter maior relevância na predição.
+-   gameDuration ≥ 300s (evitando remakes)\
+    → **1195 partidas removidas** por serem menores que 300s.
 
----
+-   O time vencedor deve ter destruído ao menos 1 torre\
+    → Time 1 com vitória e 0 torres: **631 casos**\
+    → Time 2 com vitória e 0 torres: **589 casos**\
+    Todos esses casos foram removidos.
 
-### 3. Análise e Modelagem Preditiva
-Com o dataset limpo e filtrado, iniciou-se a etapa de **modelagem com aprendizado de máquina**.
+## 2.5 Remoção de duplicatas
 
-- **Algoritmo utilizado:** Random Forest Classifier (da biblioteca Scikit-learn)  
-- **Objetivo do modelo:** prever o **time vencedor** com base na composição de campeões.  
+Foram identificados **429 gameIds duplicados**, todos idênticos.\
+Mantida apenas a primeira ocorrência via `drop_duplicates()`.
 
-O modelo foi treinado e testado dentro do ambiente **Google Colab**, utilizando as bibliotecas:
-- `sklearn.ensemble.RandomForestClassifier`  
-- `sklearn.model_selection` para divisão dos dados (treino e teste)  
-- `sklearn.metrics` para avaliação de desempenho  
+## 2.6 Seleção de variáveis
 
----
+Para o modelo de previsão foram usadas as colunas:
 
-### 🧩 Resumo do Fluxo de Dados
-1. **Coleta:** Dataset do Kaggle (League of Legends Ranked Games)  
-2. **Armazenamento:** Google Colab + DataFrame Pandas  
-3. **Transformação:**  
-   - Remoção de duplicatas (`gameId`)  
-   - Seleção de colunas relevantes  
-   - Análise de campeões mais usados  
-4. **Modelagem:** Random Forest Classifier  
-5. **Saída:** Predição do time vencedor e métricas de desempenho  
+-   t1_champ1id ... t1_champ5id\
+-   t2_champ1id ... t2_champ5id\
+-   winner
 
+Objetivo: prever o vencedor usando exclusivamente os campeões
+escolhidos.
 
+## 2.7 Preparação do modelo
+
+-   X: campeões selecionados\
+-   y: variável target (vencedor)\
+-   Split 70% treino / 30% teste, estratificado\
+-   Modelo: **Random Forest (200 árvores, random_state=42)**
+
+------------------------------------------------------------------------
+
+# 3. RESULTADOS
+
+Métricas principais:
+
+-   **Acurácia:** 0,5185\
+-   **Precisão ponderada:** 0,5181\
+-   **F1-Score ponderado:** 0,5175
+
+Observa-se leve vantagem na predição para o time 1, mas ainda próxima de
+aleatória.\
+Desempenho geral: **≈ 52%**, apenas um pouco acima do puro chute (50%).
+
+------------------------------------------------------------------------
+
+# 4. DISCUSSÃO
+
+O desempenho modesto do modelo indica que a escolha dos campeões por si
+só não é suficiente para prever o resultado de uma partida profissional.
+
+Fatores ausentes que influenciam fortemente o resultado:
+
+-   Habilidade individual dos jogadores\
+-   Sinergia entre campeões\
+-   Estatísticas in-game (ouro, abates, objetivos)\
+-   Estratégia de composição\
+-   Patch e meta do jogo
+
+Mesmo após limpeza rigorosa, o dataset ainda apresenta variabilidade
+externa não modelada, reduzindo a capacidade preditiva.
+
+------------------------------------------------------------------------
+
+# 5. CONCLUSÃO
+
+O trabalho executou um processo completo de análise e preparação do
+dataset, incluindo:
+
+-   Validação de integridade\
+-   Remoção de inconsistências, outliers e duplicatas\
+-   Seleção de variáveis\
+-   Construção de um modelo Random Forest
+
+O modelo alcançou **≈ 52% de acurácia**, revelando que os campeões
+escolhidos não são suficientes para prever com precisão o vencedor em
+partidas profissionais.
+
+------------------------------------------------------------------------
