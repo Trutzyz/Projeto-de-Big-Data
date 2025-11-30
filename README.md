@@ -121,7 +121,7 @@ Métricas principais:
 -   **F1-Score ponderado:** 0,5175
 
 Observa-se leve vantagem na predição para o time 1, mas ainda próxima de
-aleatória.\
+aleatória.
 Desempenho geral: **≈ 52%**, apenas um pouco acima do puro chute (50%).
 
 ------------------------------------------------------------------------
@@ -133,7 +133,7 @@ só não é suficiente para prever o resultado de uma partida profissional.
 
 Fatores ausentes que influenciam fortemente o resultado:
 
--   Habilidade individual dos jogadores\
+-   Habilidade individual dos jogadores
 -   Sinergia entre campeões
 -   Estatísticas in-game (ouro, abates, objetivos)
 -   Estratégia de composição
