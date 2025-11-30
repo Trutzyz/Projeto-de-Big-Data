@@ -79,7 +79,7 @@ A integridade estrutural também foi avaliada:
 
 Foram aplicadas regras lógicas relacionadas ao jogo:
 
--   gameDuration ≥ 300s (evitando remakes)\
+-   gameDuration ≥ 300s (evitando remakes)
     → **1195 partidas removidas** por serem menores que 300s.
 
 -   O time vencedor deve ter destruído ao menos 1 torre\
@@ -138,9 +138,6 @@ Fatores ausentes que influenciam fortemente o resultado:
 -   Estatísticas in-game (ouro, abates, objetivos)
 -   Estratégia de composição
 -   Patch e meta do jogo
-
-Mesmo após limpeza rigorosa, o dataset ainda apresenta variabilidade
-externa não modelada, reduzindo a capacidade preditiva.
 
 ------------------------------------------------------------------------
 
