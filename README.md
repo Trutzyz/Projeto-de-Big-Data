@@ -53,26 +53,26 @@ selecionados pelos times. O trabalho inclui:
 ## 2.1 Importação de bibliotecas e leitura dos dados
 
 Foram utilizadas as bibliotecas: **pandas**, **numpy**, **sklearn**, e
-ferramentas de upload do Google Colab.\
+ferramentas de upload do Google Colab.
 Os dados foram carregados a partir do arquivo *games.csv*.
 
 ## 2.2 Análise inicial do dataset
 
 Foi realizada uma análise exploratória da estrutura do dataset e
 visualização das primeiras linhas. Em seguida, calculou-se quais
-campeões foram mais selecionados.\
+campeões foram mais selecionados.
 O top 10 mais frequente incluiu ids como **412, 18, 67**, entre outros.
 
 ## 2.3 Verificação de valores nulos, negativos e inválidos
 
 Foram testadas condições básicas de validade:
 
--   gameId ≤ 0 → 0 ocorrências\
+-   gameId ≤ 0 → 0 ocorrências
 -   gameId, creationTime, gameDuration → 0 valores nulos
 
 A integridade estrutural também foi avaliada:
 
--   Cada partida deve possuir 10 campeões → 0 inconsistências\
+-   Cada partida deve possuir 10 campeões → 0 inconsistências
 -   Cada partida deve possuir no máximo 10 bans → 0 inconsistências
 
 ## 2.4 Validação de consistência
@@ -83,13 +83,13 @@ Foram aplicadas regras lógicas relacionadas ao jogo:
     → **1195 partidas removidas** por serem menores que 300s.
 
 -   O time vencedor deve ter destruído ao menos 1 torre\
-    → Time 1 com vitória e 0 torres: **631 casos**\
-    → Time 2 com vitória e 0 torres: **589 casos**\
+    → Time 1 com vitória e 0 torres: **631 casos**
+    → Time 2 com vitória e 0 torres: **589 casos**
     Todos esses casos foram removidos.
 
 ## 2.5 Remoção de duplicatas
 
-Foram identificados **429 gameIds duplicados**, todos idênticos.\
+Foram identificados **429 gameIds duplicados**, todos idênticos.
 Mantida apenas a primeira ocorrência via `drop_duplicates()`.
 
 ## 2.6 Seleção de variáveis
