@@ -40,11 +40,11 @@ um dataset contendo mais de 60 variáveis por partida, visando construir
 um modelo capaz de prever o vencedor utilizando apenas os campeões
 selecionados pelos times. O trabalho inclui:
 
--   inspeção e checagem de nulos e valores inválidos;\
--   validação de integridade e consistência;\
--   remoção de outliers;\
--   eliminação de duplicatas;\
--   construção e avaliação de um modelo Random Forest.
+-   Inspeção e checagem de nulos e valores inválidos;
+-   Validação de integridade e consistência;
+-   Remoção de outliers;
+-   Eliminação de duplicatas;
+-   Construção e avaliação de um modelo Random Forest.
 
 ------------------------------------------------------------------------
 
@@ -96,8 +96,8 @@ Mantida apenas a primeira ocorrência via `drop_duplicates()`.
 
 Para o modelo de previsão foram usadas as colunas:
 
--   t1_champ1id ... t1_champ5id\
--   t2_champ1id ... t2_champ5id\
+-   t1_champ1id ... t1_champ5id
+-   t2_champ1id ... t2_champ5id
 -   winner
 
 Objetivo: prever o vencedor usando exclusivamente os campeões
@@ -105,9 +105,9 @@ escolhidos.
 
 ## 2.7 Preparação do modelo
 
--   X: campeões selecionados\
--   y: variável target (vencedor)\
--   Split 70% treino / 30% teste, estratificado\
+-   X: campeões selecionados
+-   y: variável target (vencedor)
+-   Split 70% treino / 30% teste, estratificado
 -   Modelo: **Random Forest (200 árvores, random_state=42)**
 
 ------------------------------------------------------------------------
@@ -116,8 +116,8 @@ escolhidos.
 
 Métricas principais:
 
--   **Acurácia:** 0,5185\
--   **Precisão ponderada:** 0,5181\
+-   **Acurácia:** 0,5185
+-   **Precisão ponderada:** 0,5181
 -   **F1-Score ponderado:** 0,5175
 
 Observa-se leve vantagem na predição para o time 1, mas ainda próxima de
@@ -134,9 +134,9 @@ só não é suficiente para prever o resultado de uma partida profissional.
 Fatores ausentes que influenciam fortemente o resultado:
 
 -   Habilidade individual dos jogadores\
--   Sinergia entre campeões\
--   Estatísticas in-game (ouro, abates, objetivos)\
--   Estratégia de composição\
+-   Sinergia entre campeões
+-   Estatísticas in-game (ouro, abates, objetivos)
+-   Estratégia de composição
 -   Patch e meta do jogo
 
 Mesmo após limpeza rigorosa, o dataset ainda apresenta variabilidade
@@ -149,9 +149,9 @@ externa não modelada, reduzindo a capacidade preditiva.
 O trabalho executou um processo completo de análise e preparação do
 dataset, incluindo:
 
--   Validação de integridade\
--   Remoção de inconsistências, outliers e duplicatas\
--   Seleção de variáveis\
+-   Validação de integridade
+-   Remoção de inconsistências, outliers e duplicatas
+-   Seleção de variáveis
 -   Construção de um modelo Random Forest
 
 O modelo alcançou **≈ 52% de acurácia**, revelando que os campeões
